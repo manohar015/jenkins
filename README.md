@@ -11,7 +11,7 @@ This job runs all the days apart from Sunday & Saturday every once in every 4 ho
 
 ```
 
-Sonar Scanner 
+Sonar Scanner : A tools from sonarqube to help in scanning our code and publishing the result to SonarQube
 
 Quality Gate :
 
