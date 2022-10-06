@@ -7,9 +7,12 @@ Cron : This is a default scheduler in Linux
 This job runs all the days apart from Sunday & Saturday every once in every 4 hours.
 
 
-### SonarQube 
+### SonarQube  : Static Code Analysis Tool, to scan and analytise the security, vulnerabilities and code standard
 
 ```
+
+Sonar Scanner 
+
 Quality Gate :
 
 Quality Profile : 
