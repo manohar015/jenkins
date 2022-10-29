@@ -4,17 +4,6 @@ pipeline {
          choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Chose Environment') 
     }
     stages {
-        stage('VPC') {
-            steps {
-              dir('VPC') {
-                git branch: 'main', url: 'https://github.com/b50-clouddevops/terraform-vpc.git'
-                sh "terrafile -f env-${ENV}/Terrafile"  
-                sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
-                sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
-              }                    
-            }
-        }
 
         stage('DB') {
             steps {
@@ -23,8 +12,20 @@ pipeline {
                 sh "terrafile -f env-${ENV}/Terrafile"  
                 sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
                 sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                sh "terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
+                sh "terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
                }                    
+            }
+        }
+        
+        stage('VPC') {
+            steps {
+              dir('VPC') {
+                git branch: 'main', url: 'https://github.com/b50-clouddevops/terraform-vpc.git'
+                sh "terrafile -f env-${ENV}/Terrafile"  
+                sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                sh "terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
+              }                    
             }
         }
     }
