@@ -3,7 +3,9 @@ pipeline {
     parameters {
          choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Chose Environment') 
     }
-    ansiColor('xterm') {
+    options {
+        ansiColor('xterm')  // Gives colored output
+    }
     stages {    
         stage('VPC') {
             steps {
