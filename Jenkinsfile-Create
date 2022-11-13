@@ -119,7 +119,7 @@ pipeline {
           }
             stage('Creating-Frontend') {
                 steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/frontend.git'
+                    dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/frontend.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=2.1.3
