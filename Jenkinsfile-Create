@@ -48,7 +48,7 @@ pipeline {
             parallel {
                stage('Creating-User') {
                    steps {
-                       dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
+                       dir('USER') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/user.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
@@ -62,7 +62,7 @@ pipeline {
                    }
                stage('Creating-Catalogue') {
                    steps {
-                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
+                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/catalogue.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
@@ -76,7 +76,7 @@ pipeline {
                   }
             stage('Creating-Payment') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/payment.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
@@ -90,7 +90,7 @@ pipeline {
                 }
             stage('Creating-Cart') {
                 steps {
-                    dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                    dir('CART') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/cart.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
@@ -104,7 +104,7 @@ pipeline {
                 }
             stage('Creating-Shipping') {
                 steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
+                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/shipping.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
@@ -118,7 +118,7 @@ pipeline {
                 }
             stage('Creating-Frontend') {
                 steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
+                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/frontend.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
