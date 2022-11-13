@@ -71,7 +71,10 @@ pipeline {
                          }
                      }
                 }
-            stage('Destroying-Frontend') {
+             } 
+          } 
+
+      stage('Destroying-Frontend') {
                 steps {
                     dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/frontend.git'
                           sh '''
@@ -81,11 +84,9 @@ pipeline {
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
-                         }
-                     }
                 }
-             } 
-          } 
+            }
+        }
 
        stage('DB') {
             steps {
