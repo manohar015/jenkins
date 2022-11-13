@@ -39,8 +39,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars 
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -53,8 +52,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -67,8 +65,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -81,8 +78,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=$APP_VERSION
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -90,8 +86,7 @@ pipeline {
                 }
              } 
           } 
-
-        stage('DB') {
+       stage('DB') {
             steps {
               dir('DB') {
                 git branch: 'main', url: 'https://github.com/b50-clouddevops/terraform-databases.git'
