@@ -2,7 +2,6 @@ pipeline {
     agent any    
     parameters {
          choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Chose Environment') 
-         string(name: 'APP_VERSION', defaultValue: '', description: 'Choose App Version To Deploy : Ignore this VPC and DB')
     }
     options {
         ansiColor('xterm')  // Gives colored output
