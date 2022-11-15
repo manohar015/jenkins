@@ -50,7 +50,7 @@ pipeline {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/user.git'
                           sh '''
                             cd terraform-mutable
-                            export TF_VAR_APP_VERSION=2.1.4
+                            export TF_VAR_APP_VERSION=2.1.5
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
