@@ -54,5 +54,5 @@ pipeline {
 // SSH_CRED_USR
 // SSH_CRED_PSW
 // Added some commits 
-// Demonstrating the PollSCM  : 19 
+
 
