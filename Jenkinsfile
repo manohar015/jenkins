@@ -7,6 +7,9 @@ pipeline {
  
    triggers { pollSCM('*/1 * * * *') }
 
+       tools {
+        maven 'maven-3.8.5' 
+    }
       
    parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -23,6 +26,7 @@ pipeline {
             }
         }
         stage('Hello') {
+            when { branch 'master' }
                    environment {
                 ENV_URL = "stage.google.com"
             }
