@@ -23,8 +23,7 @@ pipeline {
             }
         }
         stage('Hello') {
-            when { branch 'main' }
-            environment {
+                   environment {
                 ENV_URL = "stage.google.com"
             }
             input {
