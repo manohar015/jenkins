@@ -4,90 +4,7 @@ pipeline {
          choice(name: 'ENV', choices: ['dev', 'prod'], description: 'Chose Environment') 
     }
     stages {
-         stage('Backend') {
-            parallel {
-               stage('Destroying-User') {
-                   steps {
-                       dir('USER') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/user.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                            }
-                        }
-                   }
-               stage('Destroying-Catalogue') {
-                   steps {
-                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/catalogue.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile 
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                            }
-                        }
-                  }
-            stage('Destroying-Payment') {
-                steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/payment.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                         }
-                     }
-                }
-            stage('Destroying-Cart') {
-                steps {
-                    dir('CART') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/cart.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                         }
-                     }
-                }
-            stage('Destroying-Shipping') {
-                steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/shipping.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                         }
-                     }
-                }
-             } 
-          } 
-
-      stage('Destroying-Frontend') {
-                steps {
-                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/b50-clouddevops/frontend.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=$APP_VERSION
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                }
-            }
-        }
-
+            
        stage('DB') {
             steps {
               dir('DB') {
@@ -98,18 +15,7 @@ pipeline {
                }                    
             }
         }
-  
-        stage('ALB') {
-            steps {
-              dir('DB') {
-                git branch: 'main', url: 'https://github.com/b50-clouddevops/terraform-loadbalancers.git'
-                sh "terrafile -f env-${ENV}/Terrafile"  
-                sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
-                sh "terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve"
-               }                    
-            }
-        }
-        
+                  
         stage('VPC') {
             steps {
               dir('VPC') {
